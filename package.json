@@ -1,5 +1,6 @@
 {
   "name": "advent_of_code",
+  "type": "module",
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",

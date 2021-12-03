@@ -5,12 +5,11 @@ import {
   reduce,
   prop,
 } from 'ramda'
-import { promises as fs } from "fs"
+import { getInputFile } from '../helpers.js'
 
 
-
-const tallyIncreases = (acc, curr) => ({
-  tally: curr > acc.prev ? acc.tally + 1 : acc.tally,
+const tallyIncreases = ({prev, tally}, curr) => ({
+  tally: curr > prev ? tally + 1 : tally,
   prev: curr
 })
 
@@ -21,14 +20,9 @@ const getTotalIncreases = pipe(
   prop('tally')
 )
 
-const sender = async () => {
-  try {
-    const data = await fs.readFile('input', 'utf8')
-    const count = getTotalIncreases(data)
-    console.log(`Total of ${count} increases`)
-  } catch (err) {
-    console.error(err)
-  }
+const sender = () => {
+  const count = getTotalIncreases(getInputFile())
+  console.log(count)
 }
 
 sender()
